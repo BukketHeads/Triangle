@@ -11,6 +11,7 @@ public class GameThread implements Runnable
     private Thread mainThread;
     private boolean running;
     private int curFrames;
+    private int curTicks;
 
     /**
      * Constructor for GameThread
@@ -52,6 +53,7 @@ public class GameThread implements Runnable
             {
                 timer+=1000;
                 curFrames = frames;
+                curTicks = ticks;
                 System.out.println("Ticks: " + ticks + "\nFrames: " + frames);
                 frames = 0;
                 ticks = 0;
@@ -85,7 +87,7 @@ public class GameThread implements Runnable
 
         if(view.shift() == 0)
         {
-//            view.updateRows();
+            view.updateRows();
         }
     }
     public void render()
@@ -98,9 +100,9 @@ public class GameThread implements Runnable
             {
                 view.onDraw(c);
                 Paint paint = new Paint();
-                paint.setColor(Color.RED);
+                paint.setColor(Color.BLACK);
                 paint.setTextSize(60);
-                c.drawText("Frames: " + Integer.toString(curFrames),0,60,paint);
+                c.drawText("Frames: " + curFrames + " Ticks: " + curTicks,0,60,paint);
             }
         }
         finally

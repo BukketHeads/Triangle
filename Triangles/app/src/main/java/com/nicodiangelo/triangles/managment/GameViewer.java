@@ -70,6 +70,11 @@ public class GameViewer extends SurfaceView
             shift++;
         return shift;
     }
+
+    /**
+     * This method takes the list, and attempts to shift it up
+     * however at the moment it does not work.
+     */
     public void updateRows()
     {
         for(int k = 0; k < WIDTH / 100; k++)
@@ -81,7 +86,8 @@ public class GameViewer extends SurfaceView
         {
             for(int b = 0; b < WIDTH/100; b++)
             {
-                map[b][a-1] = map[b][a].copy();
+                Triangle toShift = map[b][a].copy();
+                map[b][a-1] = toShift;
                 map[b][a] = new Triangle(0,0,null);
             }
         }
@@ -113,6 +119,11 @@ public class GameViewer extends SurfaceView
             }
         }
     }
+
+    /**
+     * Creates and fills the array with Triangle objects,
+     * and randomizes them.
+     */
     private void initalize()
     {
         map = new Triangle[WIDTH / 100][HEIGHT / 100];
@@ -132,6 +143,12 @@ public class GameViewer extends SurfaceView
         }
 
     }
+
+    /**
+     * Returns a number from 0 to 2(inclusive) depending on a
+     * randomly generated number.
+     * @return returns the random number according to the list.
+     */
     private int getNum()
     {
         int rand = (int)(Math.random() * 20);
