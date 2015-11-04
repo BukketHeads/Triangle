@@ -43,9 +43,13 @@ public class Triangle
         this.bmp = bmp;
     }
 
-    public void onDraw(Canvas g)
+    public void onDraw(Canvas g,int shift)
     {
-        g.drawBitmap(bmp,posX * 50,posY * 50,null);
+        g.drawBitmap(bmp,posX * 100,posY * 100 - shift,null);
+    }
+    public Triangle copy()
+    {
+        return new Triangle(posX,posY,bmp);
     }
     /**
      * This program returns the effect of the given class

@@ -83,6 +83,10 @@ public class GameThread implements Runnable
     public void tick()
     {
 
+        if(view.shift() == 0)
+        {
+//            view.updateRows();
+        }
     }
     public void render()
     {
@@ -93,7 +97,6 @@ public class GameThread implements Runnable
             synchronized (view.getHolder())
             {
                 view.onDraw(c);
-                c.drawColor(Color.WHITE);
                 Paint paint = new Paint();
                 paint.setColor(Color.RED);
                 paint.setTextSize(60);
