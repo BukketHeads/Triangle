@@ -1,10 +1,14 @@
 package com.nicodiangelo.triangles.classes;
 
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+
 public class Triangle
 {
     private int posX;
     private int posY;
+    private Bitmap bmp;
 
     /**
      * Default Triangle constructor
@@ -27,6 +31,23 @@ public class Triangle
     }
 
     /**
+     *
+     * @param posX
+     * @param posY
+     * @param bmp
+     */
+    public Triangle(int posX, int posY,Bitmap bmp)
+    {
+        this.posX = posX;
+        this.posY = posY;
+        this.bmp = bmp;
+    }
+
+    public void onDraw(Canvas g)
+    {
+        g.drawBitmap(bmp,posX * 50,posY * 50,null);
+    }
+    /**
      * This program returns the effect of the given class
      * @return Returns the effect of the object when chosen.
      */
@@ -36,6 +57,16 @@ public class Triangle
     }
 
 //GETTERS AND SETTERS
+
+    public Bitmap getBmp()
+    {
+        return bmp;
+    }
+
+    public void setBmp(Bitmap bmp)
+    {
+        this.bmp = bmp;
+    }
 
     /**
      * This method returns the x position of the object.

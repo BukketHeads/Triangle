@@ -14,7 +14,8 @@ public class GameRunner extends AppCompatActivity
         super.onCreate(savedInstanceState);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        GameViewer game = new GameViewer(this);
+        GameViewer game = new GameViewer(this,getWindowManager().getDefaultDisplay().getWidth(),
+                                         getWindowManager().getDefaultDisplay().getHeight());
 
         FrameLayout layout = new FrameLayout(this);
         layout.addView(game);

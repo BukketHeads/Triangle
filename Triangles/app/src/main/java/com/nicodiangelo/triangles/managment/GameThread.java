@@ -19,8 +19,11 @@ public class GameThread implements Runnable
     public GameThread(GameViewer view)
     {
         this.view = view;
-        running = true;
     }
+
+    /**
+     *
+     */
     public void run()
     {
         long lastTime = System.nanoTime();
@@ -69,7 +72,8 @@ public class GameThread implements Runnable
         try
         {
             mainThread.join();
-        }catch(InterruptedException e)
+        }
+        catch(InterruptedException e)
         {
             e.printStackTrace();
             System.out.println("HOLY CRAP IT BROKE");
