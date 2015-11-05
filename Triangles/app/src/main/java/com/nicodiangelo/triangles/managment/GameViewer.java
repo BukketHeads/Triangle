@@ -1,6 +1,7 @@
 package com.nicodiangelo.triangles.managment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,6 +19,10 @@ public class GameViewer extends SurfaceView
     final private int HEIGHT;
     private Triangle[][] map;
     private int shift;
+    final private Bitmap RED;
+    final private Bitmap GREEN;
+    final private Bitmap BLUE;
+
 
     public GameViewer(Context context, int width, int height)
     {
@@ -28,10 +33,15 @@ public class GameViewer extends SurfaceView
         HEIGHT = height;
         shift = 0;
         holder = getHolder();
+        RED = BitmapFactory.decodeResource(getResources(), R.drawable.zero);
+        GREEN = BitmapFactory.decodeResource(getResources(), R.drawable.one);
+        BLUE = BitmapFactory.decodeResource(getResources(), R.drawable.two);
 
-        holder.addCallback(new SurfaceHolder.Callback() {
+        holder.addCallback(new SurfaceHolder.Callback()
+        {
             @Override
-            public void surfaceCreated(SurfaceHolder surfaceHolder) {
+            public void surfaceCreated(SurfaceHolder surfaceHolder)
+            {
                 System.out.println("STARTED");
                 initalize();
                 game.start();
@@ -79,16 +89,16 @@ public class GameViewer extends SurfaceView
     {
         for(int k = 0; k < WIDTH / 100; k++)
         {
-            map[k][0] = new Triangle(0,0,null);
+            map[k][0] = new Triangle(0,0,0);
         }
 
         for(int a = 1; a < HEIGHT / 100; a++)
         {
             for(int b = 0; b < WIDTH/100; b++)
             {
-                Triangle toShift = map[b][a].copy();
-                map[b][a-1] = toShift;
-                map[b][a] = new Triangle(0,0,null);
+                map[b][a-1] = new Triangle(map[b][a].getPosX(),map[b][a].getPosY(),
+                        map[b][a].getBmpNum());
+                map[b][a] = null;
             }
         }
         for(int k = 0; k < WIDTH/100; k++)
@@ -96,11 +106,11 @@ public class GameViewer extends SurfaceView
             int randNum = getNum();
 
             if(randNum == 0)
-                map[k][(HEIGHT / 100) - 1] = new Triangle(k,(HEIGHT / 100) - 1,BitmapFactory.decodeResource(getResources(), R.drawable.zero));
+                map[k][(HEIGHT / 100) - 1] = new Triangle(k,(HEIGHT / 100) - 1,0);
             else if(randNum == 1)
-                map[k][(HEIGHT / 100) - 1] = new Triangle(k,(HEIGHT / 100) - 1,BitmapFactory.decodeResource(getResources(), R.drawable.one));
+                map[k][(HEIGHT / 100) - 1] = new Triangle(k,(HEIGHT / 100) - 1,1);
             else
-                map[k][(HEIGHT / 100) - 1] = new Triangle(k,(HEIGHT / 100) - 1,BitmapFactory.decodeResource(getResources(), R.drawable.two));
+                map[k][(HEIGHT / 100) - 1] = new Triangle(k,(HEIGHT / 100) - 1,2);
         }
 
 
@@ -115,7 +125,12 @@ public class GameViewer extends SurfaceView
         {
             for(int b = 0; b < HEIGHT / 100; b++)
             {
-                map[a][b].onDraw(g,shift);
+                switch(map[a][b].getBmpNum())
+                {
+                    case 0:g.drawBitmap(RED,a*100,b*100-shift,null);break;
+                    case 1:g.drawBitmap(GREEN,a*100,b*100-shift,null);break;
+                    case 2:g.drawBitmap(BLUE,a*100,b*100-shift,null);break;
+                }
             }
         }
     }
@@ -132,13 +147,8 @@ public class GameViewer extends SurfaceView
             for(int b = 0; b < HEIGHT/100; b++)
             {
                 int randNum = getNum();
+                map[a][b] = new Triangle(a,b,randNum);
 
-                if(randNum == 0)
-                    map[a][b] = new Triangle(a,b,BitmapFactory.decodeResource(getResources(), R.drawable.zero));
-                else if(randNum == 1)
-                    map[a][b] = new Triangle(a,b,BitmapFactory.decodeResource(getResources(), R.drawable.one));
-                else
-                    map[a][b] = new Triangle(a,b,BitmapFactory.decodeResource(getResources(), R.drawable.two));
             }
         }
 

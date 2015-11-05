@@ -8,7 +8,7 @@ public class Triangle
 {
     private int posX;
     private int posY;
-    private Bitmap bmp;
+    private int bmpNum;
 
     /**
      * Default Triangle constructor
@@ -34,23 +34,15 @@ public class Triangle
      *
      * @param posX
      * @param posY
-     * @param bmp
+     * @param bmpNum
      */
-    public Triangle(int posX, int posY,Bitmap bmp)
+    public Triangle(int posX, int posY,int bmpNum)
     {
         this.posX = posX;
         this.posY = posY;
-        this.bmp = bmp;
+        this.bmpNum = bmpNum;
     }
 
-    public void onDraw(Canvas g,int shift)
-    {
-        g.drawBitmap(bmp,posX * 100,posY * 100 - shift,null);
-    }
-    public Triangle copy()
-    {
-        return new Triangle(posX,posY,bmp);
-    }
     /**
      * This program returns the effect of the given class
      * @return Returns the effect of the object when chosen.
@@ -62,14 +54,13 @@ public class Triangle
 
 //GETTERS AND SETTERS
 
-    public Bitmap getBmp()
-    {
-        return bmp;
+
+    public int getBmpNum() {
+        return bmpNum;
     }
 
-    public void setBmp(Bitmap bmp)
-    {
-        this.bmp = bmp;
+    public void setBmpNum(int bmpNum) {
+        this.bmpNum = bmpNum;
     }
 
     /**
