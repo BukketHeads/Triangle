@@ -16,6 +16,7 @@ public class GameRunner extends AppCompatActivity
 
         GameViewer game = new GameViewer(this,getWindowManager().getDefaultDisplay().getWidth(),
                                          getWindowManager().getDefaultDisplay().getHeight());
+        System.out.println(getWindowManager().getDefaultDisplay().getWidth() + ":" +  getWindowManager().getDefaultDisplay().getHeight());
 
         FrameLayout layout = new FrameLayout(this);
         layout.addView(game);
